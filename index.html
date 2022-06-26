@@ -6,22 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
   </head>
   <body>
-    <main class="bg-slate-800 h-[100vh] flex items-center" id="app">
-      <div class="container mx-auto">
-        <section class="grid grid-cols-5 gap-4" id="library">
-          <div class="card text-center p-5 bg-slate-700">
-            <img class="w-full" src="" alt="" />
-            <h2 class="text-white uppercase text-2xl font-bold pt-5"></h2>
-            <div class="text-slate-400 capitalize text-xl pt-3"></div>
-            <div class="text-slate-400 text-xl"></div>
+    <div id="app">
+      <header class="header">
+        <select
+          @change.prevent="genreFilter"
+          name="genre"
+          v-model="currentGenre">
+          <option disabled selected>--Seleziona genere--</option>
+          <option v-for="genre in getGenres" :value="genre">{{genre}}</option>
+        </select>
+      </header>
+      <main class="main">
+        <div class="container ">
+          <section class="albums" id="library">
+            <div class="container">
+          <div v-for="(album, idx) in albums" :key="idx" class="card">
+            <img :src="album.poster" :alt="album.title" class="card__img" />
+            <h4 class="card__title">{{album.title}}</h4>
+            <div class="card__info">
+              <div>{{album.author}}</div>
+              <div>{{album.year}}</div>
+            </div>
           </div>
-        </section>
-      </div>
-    </main>
+        </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
